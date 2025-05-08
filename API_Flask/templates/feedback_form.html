@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback Form</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: #f4f4f4;
+            margin: 0;
+        }
+
+
+        /* Navbar Styling - Sticky at the top */
+        nav {
+            width: 93%;
+            /* Ensure full width */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: #2a2a2a;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+        nav .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+            /* Blue logo color */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            transition: transform 0.2s ease;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: color 0.3s, background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--nav-hover);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Form Container */
+        .form-container {
+            background-color: #2a2a2a;
+            /* Dark grey background for the form */
+            padding: 20px;
+            max-width: 500px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Heading */
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #3498db;
+            /* Blue color for the heading */
+        }
+
+        /* Form Label */
+        label {
+            font-size: 1rem;
+            margin-top: 10px;
+            display: block;
+            color: #bbb;
+            /* Light grey color for labels */
+        }
+
+        /* Input fields, text areas, and selects */
+        input[type="text"],
+        textarea,
+        select,
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #444;
+            /* Dark borders */
+            border-radius: 6px;
+            background-color: #333;
+            /* Dark background for input fields */
+            color: #f4f4f4;
+            /* Light text */
+            font-size: 1rem;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #3498db;
+            /* Blue border on focus */
+        }
+
+        /* Checkbox and Radio button groups */
+        .checkbox-group,
+        .radio-group {
+            margin-top: 10px;
+            color: #bbb;
+            /* Light grey text for options */
+        }
+
+        .checkbox-group input,
+        .radio-group input {
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .checkbox-group label,
+        .radio-group label {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        /* Submit Button */
+        button {
+            background-color: #3498db;
+            /* Blue background */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            /* Slightly darker blue on hover */
+        }
+
+        /* Error Messages */
+        .error {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        textarea {
+            width: 95%;
+            max-width: 100%;
+            height: 80px;
+            resize: vertical;
+            padding: 12px;
+            border: 1px solid #444;
+            border-radius: 6px;
+            background-color: #333;
+            color: #f4f4f4;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">eBlog</div>
+        <ul>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+            <li><a href="{{ url_for('home') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('my_blogs') }}">My Blogs</a></li>
+        </ul>
+    </nav>
+    <div class="page-wrapper" style="padding: 20px;">
+        <div class="form-container">
+            <h2>Feedback Form</h2>
+            <form method="POST" action="{{ url_for('submit_feedback') }}">
+
+                <!-- Feedback Category -->
+                <label for="feedback_category">Feedback Category</label>
+                <select id="feedback_category" name="feedback_category" required>
+                    {% for value, label in category_choices %}
+                    <option value="{{ value }}">{{ label }}</option>
+                    {% endfor %}
+                </select>
+
+                <!-- Improvement Suggestions -->
+                <label for="improvement">What can we improve?</label>
+                <textarea id="improvement" name="improvement" rows="4" required></textarea>
+
+                <!-- Topics of Interest (Checkboxes) -->
+                <label for="topic_interest">Topics you are interested in</label>
+                <div class="checkbox-group">
+                    {% for value, label in interest_choices %}
+                    <input type="checkbox" id="topic_{{ value }}" name="topic_interest" value="{{ value }}">
+                    <label for="topic_{{ value }}">{{ label }}</label>
+                    {% endfor %}
+                </div>
+
+                <!-- Recommend (Radio buttons) -->
+                <label>Would you recommend us?</label>
+                <div class="radio-group">
+                    <input type="radio" id="recommend_yes" name="recommend" value="yes">
+                    <label for="recommend_yes">Yes</label>
+                    <input type="radio" id="recommend_no" name="recommend" value="no">
+                    <label for="recommend_no">No</label>
+                </div>
+
+                <!-- User Experience Rating -->
+                <label for="user_experience">Rate your experience (1-10)</label>
+                <select id="user_experience" name="user_experience" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+
+                <button type="submit">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

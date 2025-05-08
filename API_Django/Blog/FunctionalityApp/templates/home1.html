@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        .custom-toggler {
+            border: none;
+            outline: none;
+            background: transparent;
+            padding: 8px;
+            margin-right: 10px;
+        }
+
+        .custom-toggler span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 4px auto;
+            background-color: white;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Optional Animation for open state */
+        .navbar-toggler.collapsed .bar1 {
+            transform: rotate(0);
+        }
+
+        .navbar-toggler:not(.collapsed) .bar1 {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .navbar-toggler.collapsed .bar2 {
+            opacity: 1;
+        }
+
+        .navbar-toggler:not(.collapsed) .bar2 {
+            opacity: 0;
+        }
+
+        .navbar-toggler.collapsed .bar3 {
+            transform: rotate(0);
+        }
+
+        .navbar-toggler:not(.collapsed) .bar3 {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="{% url 'dashboard' %}">E-Blog</a>
+        <button class="navbar-toggler custom-toggler collapsed" type="button" data-toggle="collapse"
+            data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="bar1"></span>
+            <span class="bar2"></span>
+            <span class="bar3"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'profile' %}">My Profile</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'my_blogs' %}">My Blogs</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'about' %}">About</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'my_bookmarks' %}">My Bookmarks</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'feedback' %}">Feedback Form</a>
+                </li>                
+            </ul>
+        </div>
+
+        <form method="GET" action="{% url 'dashboard' %}" class="form-inline justify-content-center mb-4">
+
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Search Blogs"
+                    value="{{ request.GET.search }}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-light" type="submit">
+                        🔍
+                    </button>
+                </div>
+            </div>
+            {% if profile and profile.image %}
+            <span><img src="{{ profile.image.url }}" alt="Profile Pic"
+                style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">{{profile.user}}</span>
+            {% else %}
+            <img src="{% static 'images/default.jpg' %}" alt="Default Pic"
+                style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+            {% endif %}
+        </form>
+
+
+    </nav>
+    
+    <div class="container">
+        <div class="category-section d-flex flex-wrap justify-content-around">
+            {% for card in theme_cards %}
+            <div class="category-card" style="background-image: url('{{ card.image }}');">
+                <h3>{{ card.name }}</h3>
+                <a href="{% url 'create_blog' %}?theme={{ card.name }}" class="btn-select-theme">Select Theme</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+    <div class="blog-list-section mt-5">
+        <form method="GET" action="{% url 'dashboard' %}" class="filter-form">
+            <h2>Trending Blogs</h2>
+            <label for="category" style="color: white;">Filter by Category:</label>
+            <select name="category" id="category">
+                <option value="">All Categories</option>
+                {% for category in categories %}
+                <option value="{{ category }}" {% if request.GET.category == category %}selected{% endif %}>
+                    {{ category }}
+                </option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn">Filter</button>
+        </form>
+
+        <div class="blog-list-container">
+            {% for blog in Blogs %}
+            <div class="blog-entry">
+                <h2><a href="#">{{ blog.title }}</a></h2>
+                <p>Category: {{ blog.category }}</p>
+                <p>{{ blog.content|slice:":200" }}...</p>
+                <a href="{% url 'view_blog' blog.blog_id %}">View</a>
+
+                {% if request.user == blog.author or request.user.is_superuser %}
+                <a href="{% url 'edit_blog' blog.blog_id %}" class="btn">Edit</a>
+                <a href="{% url 'delete_blog' blog.blog_id %}" class="btn"
+                    onclick="return confirm('Are you sure you want to delete this blog?');">Delete</a>
+
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+
+        <a href="{% url 'logout' %}" class="btn btn-theme" style="color: white;">Logout</a>
+    </div>
+
+    <!-- Bootstrap JS for responsive toggler -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

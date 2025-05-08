@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #2f2f2f;
+    color: #fff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #66d9ef;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    margin: 20px;
+    width: calc(25% - 40px);
+    background-color: #444;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.card-header {
+    padding: 20px;
+    border-bottom: 1px solid #555;
+}
+
+.card-header img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 2px solid #66d9ef;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-body p {
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+.card-body ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.card-body li {
+    margin-bottom: 10px;
+    color: #aaa;
+}
+
+.card-body li::before {
+    content: "\2022";
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #66d9ef;
+    margin-right: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    .card {
+        width: calc(50% - 40px);
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .card {
+        width: 100%;
+    }
+}
+
+a{
+    color: white;
+}

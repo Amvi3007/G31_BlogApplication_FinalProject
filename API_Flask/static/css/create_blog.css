@@ -1,0 +1,178 @@
+ /* Basic styling */
+ body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    margin: 0;
+    padding: 0;
+    color: #f5f5f5;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 2.5rem;
+    color: #f5f5f5;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+}
+
+.form-section {
+    width: 100%;
+}
+
+.form-section label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+    color: #ddd;
+}
+
+.form-section input[type="text"],
+.form-section textarea,
+.form-section select {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #444;
+    margin-bottom: 20px;
+    background-color: #333;
+    color: #f5f5f5;
+}
+
+.form-section button {
+    background-color: #2980b9;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.form-section button:hover {
+    background-color: #3498db;
+}
+
+.form-section h2 {
+    font-size: 1.2rem;
+    color: #f5f5f5;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Additional Styling */
+.form-section input[type="file"] {
+    display: none;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color:#333;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.navbar-toggler {
+    border-color:black;
+}
+
+.navbar-toggler-icon {
+    background-color:gray;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #f5f5f5;
+}
+
+.navbar {
+    background-color: #333;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 10px 0; /* Add some padding if needed */
+}
+
+.container {
+    margin-top: 80px; /* Adjust according to your navbar height */
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    z-index: 1000; /* Higher z-index */
+}
+
+/* Header Styles */
+header {
+    width: 100%;
+    background-color: #111;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+header .logo {
+    font-size: 1.8rem;
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+header nav {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+header nav a {
+    color: #fff;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+header nav a:hover {
+    background-color: #444;
+}

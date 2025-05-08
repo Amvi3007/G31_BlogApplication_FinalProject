@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ category|title }} Entries</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      background: linear-gradient(rgba(18, 18, 18, 0.9), rgba(18, 18, 18, 0.9)),
+      url('https://images.unsplash.com/photo-1497493292307-31c376b6e479?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h2 {
+      color: #00aaff;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 32px;
+    }
+
+    .button {
+      background-color: #00aaff;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+      margin-bottom: 30px;
+    }
+
+    .button:hover {
+      background-color: #0077cc;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: rgba(30, 30, 30, 0.8);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+    }
+
+    th, td {
+      padding: 14px 20px;
+      border-bottom: 1px solid #333;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: #1e1e1e;
+      color: #00aaff;
+      font-size: 16px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #1a1a1a;
+    }
+
+    td strong {
+      color: #00ccff;
+    }
+
+    a {
+      color: #00ccff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      border:2px solid white;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .footer-link:hover {
+      color: #00aaff;
+    }
+  </style>
+</head>
+<body>
+  <a href="{% url 'select_action' category=category %}" class="footer-link">Back to Categories</a>
+  <h2>Entries for {{ category|title }}</h2>
+
+  <div style="text-align: center;">
+    <a href="{% url 'category_form' category=category action='post' %}" class="button">Create New Entry</a>
+  </div>
+
+  {% if entries %}
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Details</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for entry in entries %}
+          <tr>
+            <td>{{ entry.id }}</td>
+            <td>
+              {% for key, value in entry.data.items %}
+                <strong>{{ key|title }}:</strong> {{ value }}<br>
+              {% endfor %}
+            </td>
+            <td>
+              <a href="{% url 'update_entry' category=category entry_id=entry.id %}">Edit</a> |
+              <a href="{% url 'delete_entry' category=category entry_id=entry.id %}">Delete</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p style="text-align: center; color: #ccc;">No entries available for this category.</p>
+  {% endif %}
+
+
+</body>
+</html>

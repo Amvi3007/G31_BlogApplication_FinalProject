@@ -1,0 +1,339 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #121212; /* Dark background */
+    color: white;
+    height: 100%;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color:#333;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.navbar-toggler {
+    border-color:black;
+}
+
+.navbar-toggler-icon {
+    background-color:gray;
+}
+
+/* Remove any body or html default background overrides from Bootstrap or other styles */
+body {
+    background-color: #121212 !important; /* Force background color */
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    flex-wrap: wrap;
+    margin-top: 80px; /* Adjust to avoid overlap with navbar */
+}
+
+/* Left Section (Category Cards) */
+.category-section {
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+.category-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    width: 100%;
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+    margin: 10px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-card:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.category-card:hover {
+    transform: translateY(-10px);
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.category-card h3 {
+    position: relative;
+    z-index: 2;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.category-card .btn-select-theme {
+    position: relative;
+    z-index: 2;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 15px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.category-card .btn-select-theme:hover {
+    background-color: #2980b9;
+    transform: translateY(-5px);
+}
+
+/* Right Section (Blog List) */
+.blog-list-section {
+    width: 30%;
+    margin-left: 20px;
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 10;
+}
+.blog-list-section::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
+.trending-section {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    margin-top: 10px;
+}
+
+.blog-entry {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    color: white;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.blog-entry:hover {
+    transform: translateY(-5px);
+    background-color: #333;
+}
+
+.blog-entry h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.blog-entry p {
+    font-size: 1rem;
+    color: #bbb;
+    margin-bottom: 15px;
+}
+
+.blog-entry a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.blog-entry a:hover {
+    text-decoration: underline;
+}
+
+.btn-sm {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 1rem;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.btn-sm:hover {
+    color: #3498db;
+    transform: translateY(-3px);
+}
+
+/* Filter Form */
+.filter-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.filter-form select {
+    background-color: #333;
+    color: white;
+    padding: 12px 15px;
+    border-radius: 25px;
+    border: none;
+    font-size: 1rem;
+    width: 100%;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.filter-form button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.filter-form button:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+}
+
+/* Responsive Styles */
+@media (max-width: 767px) {
+    .category-card {
+        height: 250px;
+    }
+
+    .category-section {
+        width: 100%;
+    }
+
+    .blog-list-section {
+        width: 100%;
+        position: static;
+        margin-left: 0;
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+    .container {
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+    }
+
+    .trending-section {
+        margin-bottom: 20px;
+    }
+
+    .category-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .category-card .btn-select-theme {
+        padding: 10px 25px;
+    }
+
+    .blog-entry h2 {
+        font-size: 1.5rem;
+    }
+}
+/* General Form Styling */
+.search-form {
+display: flex;
+justify-content: center;
+align-items: center;
+/* margin-top: 20px; */
+/* max-width: 400px; Smaller width */
+/* margin: 20px auto; */
+/* padding: 8px; */
+background-color: rgba(0, 0, 0, 0.8); /* Dark background matching theme */
+border-radius: 25px;
+box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+}
+
+.search-form input {
+padding: 8px 12px;
+font-size: 14px;
+color: black; /* Text color inside input */
+background-color: white; /* White input field */
+border: none;
+border-radius: 25px;
+width: 75%;
+margin-right: 10px;
+transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-form input:focus {
+background-color: #f0f0f0; /* Light gray background on focus */
+outline: none;
+transform: translateY(-3px);
+}
+
+.search-form button {
+padding: 8px 15px;
+font-size: 14px;
+background-color: #3498db;
+color: white;
+border: none;
+border-radius: 25px;
+cursor: pointer;
+transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-form button:hover {
+background-color: #2980b9;
+transform: translateY(-3px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+.search-form {
+    width: 100%;
+    margin-top: 10px;
+    padding: 8px;
+}
+
+.search-form input {
+    width: 100%;
+    margin-right: 0;
+    font-size: 14px;
+}
+
+.search-form button {
+    width: 100%;
+    margin-top: 10px;
+}
+}

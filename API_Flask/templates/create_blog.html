@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Blog</title>
+    <link rel="stylesheet" href="/static/css/create_blog.css">
+</head>
+<body>
+    <header>
+        <div class="logo">E-Blog</div>
+        <nav>
+            <a href="{{ url_for('home') }}">Back to Blogs</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+            <a href="{{ url_for('about') }}">About</a>
+        </nav>
+    </header>
+    
+
+    <main>
+        <h1>Create a New Blog</h1>
+
+        <form action="{{ url_for('create_blog') }}" method="POST" enctype="multipart/form-data">
+            <div class="container">
+                <div class="form-section">
+                    <label for="title">Blog Title:</label>
+                    <input type="text" name="title" id="title" required><br>
+
+                    <label for="content">Content:</label>
+                    <textarea name="content" id="content" rows="5" required></textarea><br>
+
+                    <label for="image">Upload an image: choose file</label>
+                    <input type="file" name="image" id="image" accept="image/*"><br>
+
+                    <label for="category">Category:</label>
+                    <select name="category" id="category" required>
+                        <option value="Food">Food</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Beauty & Makeup">Beauty & Makeup</option>
+                        <option value="Healthy Lifestyle">Healthy Lifestyle</option>
+                        <option value="Politics">Politics</option>
+                    </select><br>
+
+                    <button type="submit" class="btn btn-primary">Create Blog</button>
+                </div>
+            </div>
+        </form>
+    </main>
+
+
+    <script>
+        document.querySelector("#image").addEventListener("change", function (event) {
+            const fileName = event.target.files[0].name;
+            const label = event.target.previousElementSibling;  // Correcting to previous sibling to update the label text
+            label.textContent = fileName;
+        });
+    </script>
+</body>
+</html>

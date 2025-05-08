@@ -1,0 +1,180 @@
+  /* Global Styles */
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a; /* Dark grey background */
+    color: #e0e0e0; /* Light grey text */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height of viewport */
+}
+
+/* Header Styles */
+header {
+    background-color: #000; /* Black header */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.1rem;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
+/* Profile Container */
+.container {
+    max-width: 600px;
+    width: 100%;
+    background-color: #333; /* Dark grey background for the container */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Smooth shadow for depth */
+    margin: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.container:hover {
+    transform: translateY(-10px); /* Hover effect for elevation */
+}
+
+h2 {
+    text-align: center;
+    color: #fff; /* White text for the heading */
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 1.1rem;
+    color: #bbb; /* Light grey text for labels */
+}
+
+input[type="email"], input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #555; /* Dark grey border */
+    border-radius: 5px;
+    background-color: #444; /* Dark grey background */
+    color: #e0e0e0; /* Light grey text inside input */
+    transition: border-color 0.3s ease;
+}
+
+input[type="email"]:disabled {
+    background-color: #666; /* Darker grey for disabled input */
+}
+
+input[type="email"]:focus, input[type="text"]:focus {
+    border-color: #007bff; /* Blue border on focus */
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.2rem;
+    background-color: #000; /* Black button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #444; /* Dark grey on hover */
+}
+
+.alert {
+    text-align: center;
+    background-color: #444; /* Dark grey alert box */
+    color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* Footer */
+footer {
+    background-color: #000; /* Black footer */
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* Header Styles */
+header {
+    width: 100%;
+    background-color: #111;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+header .logo {
+    font-size: 1.8rem;
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+header nav {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+header nav a {
+    color: #fff;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+header nav a:hover {
+    background-color: #444;
+}

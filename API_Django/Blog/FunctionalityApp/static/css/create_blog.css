@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styles */
+header {
+    background-color: #1f1f1f;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #ffffff;
+}
+nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+nav a {
+    color: #dcdcdc;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+nav a:hover {
+    color: #00bcd4;
+}
+.search-box {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+}
+
+/* Centered Blog Container */
+.container {
+    width: 100%;
+    max-width: 600px;
+    background-color: #1e1e1e;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    margin: auto; /* Center vertically when space permits */
+}
+
+/* Headings */
+.container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Form Elements */
+form input[type="text"],
+form textarea,
+form select,
+form input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 6px;
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    font-size: 16px;
+    resize: vertical;
+}
+
+form textarea {
+    height: 150px;
+}
+
+button[type="submit"] {
+    background-color: #00bcd4;
+    color: #fff;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+button[type="submit"]:hover {
+    background-color: #00a0b0;
+}
+
+/* Message Styles */
+.message {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+.message.success {
+    background-color: #2e7d32;
+    color: #c8e6c9;
+}
+.message.error {
+    background-color: #c62828;
+    color: #ffcdd2;
+}

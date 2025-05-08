@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile</title>
+    <link rel="stylesheet" href="/static/css/profile.css">
+    <style>
+        .profile-pic-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #333;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .alert {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-left: 5px solid #4CAF50;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'header.html' %} <!-- Include the header -->
+
+    <div class="container">
+        <h2>Your Profile</h2>
+
+        <!-- Display current profile picture -->
+        <div class="profile-pic-container">
+            <img src="{{ url_for('static', filename='uploads/' + (current_user.profile_pic or 'default.jpg')) }}"
+                alt="Profile Picture" class="profile-pic">
+        </div>
+
+        <!-- Profile form -->
+        <form action="{{ url_for('profile') }}" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" value="{{ current_user.email }}" disabled>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" value="{{ current_user.username }}" disabled>
+            </div>
+
+            <!-- Display selected categories -->
+            <div class="form-group">
+                <label for="categories">Categories:</label>
+                <input type="text" class="form-control" id="categories"
+                    value="{{ current_user.categories | map(attribute='name') | join(', ') }}" disabled>
+
+
+
+            </div>
+
+            <!-- File upload for new profile picture -->
+            <div class="form-group">
+                <label for="profile_pic">Change Profile Picture:</label>
+                <input type="file" class="form-control" id="profile_pic" name="profile_pic">
+            </div>
+
+            <button type="submit">Update Profile Picture</button>
+        </form>
+
+        {% if message %}
+        <div class="alert">
+            {{ message }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>

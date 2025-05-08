@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% if action == 'post' %}Create{% elif action == 'put' %}Edit{% endif %} {{ category|title }} Entry</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(rgba(18,18,18,0.9), rgba(18,18,18,0.9)),
+      url('https://images.unsplash.com/photo-1497493292307-31c376b6e479?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h2 {
+      color: #00aaff;
+      margin-bottom: 25px;
+      text-align: center;
+      font-size: 30px;
+      text-shadow: 0 2px 5px #000;
+    }
+
+    form {
+      background-color: rgba(30, 30, 30, 0.95);
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 170, 255, 0.3);
+      width: 90%;
+      max-width: 500px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+      color: #00ccff;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      background-color: #2a2a2a;
+      border: 1px solid #555;
+      color: #fff;
+      border-radius: 5px;
+      margin-top: 6px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    .button {
+      margin-top: 25px;
+      background-color: #00aaff;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #0077cc;
+    }
+
+    a {
+        position: absolute;
+      top: 20px;
+      left: 20px;
+      border:2px solid white;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      color:#0077cc;
+    }
+
+    @media (max-width: 600px) {
+      form {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+    <a href="{% url 'category_form' category=category action='get' %}">Back to Entries</a>
+  <h2>
+    {% if action == 'post' %}Create New Entry
+    {% elif action == 'put' %}Edit Entry
+    {% endif %} for {{ category|title }}
+  </h2>
+
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="button">
+      {% if action == 'post' %}
+        Create
+      {% elif action == 'put' %}
+        Update
+      {% endif %}
+    </button>
+  </form>
+
+
+</body>
+</html>

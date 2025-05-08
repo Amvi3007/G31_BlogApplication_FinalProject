@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ blog.title }}</title>
+    <link rel="stylesheet" href="/static/css/view_blog.css">
+    <style>
+        /* Basic styling for the modal (popup) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black with transparency */
+            padding-top: 60px;
+        }
+
+        /* Modal content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        /* Close button for the modal */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'header.html' %} <!-- Include the header -->
+
+    <div class="container">
+        <div class="blog-details">
+            <h1>{{ blog.title }}</h1>
+            <p><strong>Category:</strong> {{ blog.category }}</p>
+
+            {% if image_url %}
+            <img src="{{ image_url }}" alt="Blog Image" height="400",width="400">
+            {% else %}
+            <p>No image available</p>
+            {% endif %}
+
+
+            <div class="blog-content">
+                <p>{{ blog.content }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <form id="likeForm" action="{{ url_for('like_blog', blog_id=blog.id) }}" method="POST">
+            <button type="submit" id="like-btn">Like</button>
+            <span id="like-count">{{ like_count }}</span>
+        </form>
+        <button class="comment-btn">Comment</button>
+        <button class="share-btn">Share</button>
+    </div>
+
+    <div class="comment-section">
+        <h3>Comments</h3>
+        {% for comment in blog.comments %}
+        <div class="comment">
+            <p><strong>{{ comment.user.username }}:</strong> {{ comment.content }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Modal for commenting -->
+    <div id="commentModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form action="{{ url_for('add_comment', blog_id=blog.id) }}" method="POST">
+                <textarea name="content" placeholder="Add a comment..." required></textarea>
+                <button type="submit">Post Comment</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("commentModal");
+
+        // Get the button that opens the modal
+        var btn = document.querySelector(".comment-btn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Handle the like button functionality
+        document.getElementById("likeForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const likeBtn = document.getElementById("like-btn");
+            const likeCount = document.getElementById("like-count");
+
+            fetch(this.action, { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                    } else {
+                        likeCount.textContent = data.like_count;
+                        alert(data.message);
+                    }
+                })
+                .catch(err => console.error(err));
+        });
+
+        // Share button functionality
+        document.querySelector(".share-btn").addEventListener("click", function () {
+            const blogUrl = window.location.href;
+            const tweetUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(blogUrl)}&text=Check%20out%20this%20blog%20post!`;
+            window.open(tweetUrl, '_blank', 'width=550,height=420');
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,321 @@
+/* General Styles */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background: #f7f7f7; /* Light background for overall aesthetic */
+    color: white;
+  }
+
+  /* Navbar */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .navbar-brand, .nav-link {
+    color: white !important;
+    font-weight: 600;
+  }
+
+  .nav-item {
+    margin: 0 15px;
+  }
+
+  .nav-link {
+    transition: color 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: #3498db !important;
+  }
+
+  /* Enhanced Welcome Section */
+  #home {
+    position: relative;
+    padding: 80px 20px;
+    text-align: center;
+    background-color: black;
+    color: white;
+    min-height: 80vh; /* Slightly reduced height */
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('/static/image1.jpg');
+    background-size: cover;
+    background-position: center;
+    box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.5);
+  }
+
+  #home h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: white;
+    animation: fadeIn 2s ease-out;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  }
+
+  #home p {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+    animation: fadeIn 2s ease-out;
+    animation-delay: 0.5s;
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  #hom2 .btn-theme {
+    padding: 12px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 30px;
+    background-color: #fff;
+    color: #333;
+    border: 2px solid transparent;
+    transition: background-color 0.3s ease, border 0.3s ease;
+    animation: fadeIn 2s ease-out;
+    animation-delay: 1s;
+  }
+
+  #hom2 .btn-theme:hover {
+    background-color: #2980b9;
+    color: white;
+    border: 2px solid #2980b9;
+    transform: translateY(-5px); /* Slight elevation effect */
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Carousel styles */
+  .carousel-item img {
+    width: 100%;
+    height: 50vh; /* Adjusted height to fit better */
+    object-fit: cover;
+    border-radius: 20px;
+  }
+
+  /* Adjusted for proper sizing on mobile devices */
+  @media (max-width: 767px) {
+    .carousel-item img {
+      height: 70vh; /* Reduced height for smaller screens */
+    }
+  }
+
+  /* Footer */
+  footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 0; /* Ensure no margin above footer */
+    position: relative;
+  }
+
+  /* Remove white space after #hom2 */
+  #hom2 {
+    position: relative;
+    padding: 80px 20px;
+    text-align: center;
+    background-color: gray;
+    color: white;
+    min-height: 70vh;
+    background: gray;
+    background-size: cover;
+    background-position: center;
+    box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.5);
+    margin-bottom: 0; /* Remove the margin to eliminate space below */
+    padding-bottom: 0 !important; /* Remove bottom padding if it's causing space */
+  }
+
+  /* Remove rounded corners in the card */
+  .card {
+    border-radius: 0 !important; /* Remove card rounding */
+    overflow: hidden; /* Ensure the content stays inside */
+    margin-bottom: 0; /* Remove bottom margin */
+  }
+
+  .card-body {
+    border-radius: 0 !important;
+  }
+
+  /* Ensure that there is no extra margin between sections */
+  .container, .row, .col {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Reset any default body or html margins or paddings */
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Footer Styling */
+/* Footer Styling */
+footer {
+background-color: #333;
+color: white;
+padding: 40px 0;
+text-align: center;
+font-size: 1rem;
+position: relative;
+overflow: hidden; /* Hide any overflow */
+}
+
+footer .container {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+}
+
+footer .row {
+width: 100%;
+display: flex;
+justify-content: space-between;
+margin: 0;
+}
+
+footer h5 {
+font-weight: bold;
+margin-bottom: 15px;
+color: #fff;
+font-size: 1.2rem;
+}
+
+footer ul {
+list-style-type: none;
+padding: 0;
+}
+
+footer ul li {
+margin-bottom: 10px;
+}
+
+footer ul li a {
+color: white;
+text-decoration: none;
+transition: color 0.3s ease;
+}
+
+footer ul li a:hover {
+color: #3498db;
+}
+
+footer .social-links {
+display: flex;
+justify-content: start;
+gap: 15px; /* Add space between icons */
+margin-top: 10px;
+}
+
+footer .social-link img {
+transition: transform 0.3s ease;
+}
+
+footer .social-link img:hover {
+transform: scale(1.1);
+}
+
+footer .btn-back-to-top {
+background-color: #3498db;
+color: white;
+border: none;
+padding: 12px 30px;
+border-radius: 25px;
+cursor: pointer;
+font-size: 1.1rem;
+transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+footer .btn-back-to-top:hover {
+background-color: #2980b9;
+transform: translateY(-5px);
+}
+
+footer p {
+font-size: 0.9rem;
+margin-top: 20px;
+color: #ddd;
+}
+
+/* Responsive Styles for Footer */
+@media (max-width: 991px) {
+footer .container {
+  flex-direction: column;
+  text-align: left;
+}
+
+footer .row {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+footer .col-md-3 {
+  margin-bottom: 30px;
+  width: 100%; /* Make each column take full width on smaller screens */
+}
+
+footer .social-links {
+  justify-content: center;
+  margin-top: 10px;
+}
+
+footer .btn-back-to-top {
+  width: 100%;
+  margin-top: 20px;
+}
+
+footer h5 {
+  font-size: 1.1rem;
+}
+
+footer p {
+  text-align: center;
+}
+}
+
+
+/* Responsive Styles for Footer */
+@media (max-width: 767px) {
+footer .container {
+  flex-direction: column;
+  text-align: left;
+}
+
+footer .row {
+  flex-direction: column;
+}
+
+footer .col-md-3 {
+  margin-bottom: 20px;
+}
+
+footer .btn-back-to-top {
+  width: 100%;
+  margin-top: 20px;
+}
+}
+.social-link{
+color: #ddd;
+text-decoration: none;
+}
+.social-link:hover {
+  color: #3498db;
+}

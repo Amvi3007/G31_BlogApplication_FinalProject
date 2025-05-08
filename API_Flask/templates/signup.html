@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/signup.css">
+</head>
+
+<body>
+    <div class="signup-container">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h2>Create an Account</h2>
+
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    <div class="alert alert-danger">
+                        {% for category, message in messages %}
+                        <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+                    <form method="POST" action="{{ url_for('signup') }}" onsubmit="return validateForm()">
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" name="username" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                            <span id="email-error" style="color: red; display: none;">Invalid email structure.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password" class="form-control" required>
+                            <span id="password-error" style="color: red; display: none;">Password must be at least 8
+                                characters long and contain at least one special character.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_password">Confirm Password:</label>
+                            <input type="password" id="confirm_password" name="confirm_password" class="form-control"
+                                required>
+                            <span id="confirm-error" style="color: red; display: none;">Passwords do not match.</span>
+                        </div>
+                        <div class="category-options">
+                            {% for cat in categories %}
+                                <label>
+                                    <input type="checkbox" name="category" value="{{ cat }}"> {{ cat }}
+                                </label>
+                            {% endfor %}
+                        </div>
+                        
+                        <button type="submit" class="btn btn-theme">Sign Up</button>
+                    </form>
+                    <p class="mt-3">Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+                </div>
+
+                <div class="col-lg-6 col-md-12 text-center d-none d-lg-block">
+                    <img src="/static/sign_up.jpg" alt="Logo" class="img-fluid" width="300">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm_password").value;
+            var isValid = true;
+
+            // Email validation
+            var emailError = document.getElementById("email-error");
+            if (!email.includes("@")) {
+                emailError.style.display = "block";
+                isValid = false;
+            } else {
+                emailError.style.display = "none";
+            }
+
+            // Password validation
+            var passwordError = document.getElementById("password-error");
+            var passwordPattern = /[!@#$%^&*(),.?":{}|<>]/;
+            if (password.length < 8 || !passwordPattern.test(password)) {
+                passwordError.style.display = "block";
+                isValid = false;
+            } else {
+                passwordError.style.display = "none";
+            }
+
+            // Password confirmation validation
+            var confirmError = document.getElementById("confirm-error");
+            if (password !== confirmPassword) {
+                confirmError.style.display = "block";
+                isValid = false;
+            } else {
+                confirmError.style.display = "none";
+            }
+
+            // Categories validation
+            var checkboxes = document.querySelectorAll('input[name="categories"]:checked');
+            var categoriesError = document.getElementById("categories-error");
+            if (checkboxes.length === 0) {
+                categoriesError.style.display = "block";
+                isValid = false;
+            } else {
+                categoriesError.style.display = "none";
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+
+</html>

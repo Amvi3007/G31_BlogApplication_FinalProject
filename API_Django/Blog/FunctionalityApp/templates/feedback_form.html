@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback Form - eBlog</title>
+    <style>
+        :root {
+            --nav-bg: #000;
+            --nav-hover: #3498db;
+            --form-bg: #1e1e1e;
+            --input-bg: #2e2e2e;
+            --text-color: #ffffff;
+            --primary-color: #4CAF50;
+            --hover-color: #45a049;
+            --error-color: #ff6b6b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: rgba(128, 128, 128, 0.764);
+            color: #333;
+        }
+
+        /* Navbar Styling */
+        nav {
+            background-color: rgba(0, 0, 0, 0.832);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.155);
+        }
+
+        nav .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav ul li {
+            transition: transform 0.2s ease;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 8px 12px;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 5px;
+       }
+
+        nav ul li a:hover {
+            color: var(--nav-hover);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-container {
+            background-color: var(--form-bg);
+            color: var(--text-color);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        label {
+            display: block;
+            margin: 18px 0 8px;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 15px;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: 2px solid white;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-group label {
+            background-color: var(--input-bg);
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .checkbox-group label:hover {
+            background-color: #3a3a3a;
+        }
+
+        button {
+            margin-top: 25px;
+            background-color: #255778 ;
+            color: var(--text-color);
+            padding: 14px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #1c4763a0;
+        }
+
+        .error {
+            color: var(--error-color);
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                padding: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .form-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+    <div class="logo">eBlog</div>
+    <ul>
+        <li><a href="{% url 'my_blogs' %}">My Blogs</a></li>
+        <li><a href="{% url 'about' %}">About Us</a></li>
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+    </ul>
+</nav>
+
+<!-- Form Section -->
+<div class="form-section">
+    <div class="form-container">
+        <h2>Feedback Form</h2>
+        <form method="POST" action="{% url 'feedback' %}">
+            {% csrf_token %}
+            {% for field in form %}
+                {% if field.name == 'topic_interest' %}
+                    <label>{{ field.label }}</label>
+                    <div class="checkbox-group">
+                        {% for checkbox in field %}
+                            <label>{{ checkbox.tag }} {{ checkbox.choice_label }}</label>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <label>{{ field.label }}</label>
+                    {{ field }}
+                {% endif %}
+                {% if field.errors %}
+                    <div class="error">{{ field.errors }}</div>
+                {% endif %}
+            {% endfor %}
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
